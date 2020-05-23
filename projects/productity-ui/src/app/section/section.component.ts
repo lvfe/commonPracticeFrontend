@@ -13,13 +13,7 @@ export class SectionComponent implements OnInit {
   public input;
   constructor(public store: Store<any>) { 
     this.allData$ = this.store.select(r=>r);
-    this.allData$
-      .subscribe(arg => {
-        console.log('622');
-        console.log(arg)
-      }, error => {
-        console.log('6322');
-      });
+    
     
   }
 

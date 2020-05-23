@@ -3,6 +3,7 @@ import { changeLabel, changeOauthUrl, loadMovie, changeFilter, loadMovieSuccess,
 import { environment } from 'projects/highchartlib/src/environments/environment';
 import { AppState, MovieState, GlobalState } from '../selector';
 import { routerReducer } from '@ngrx/router-store';
+import * as fromUser from './user.reducer';
 
 export const initialGlobalState = {
     label: 'ua',
@@ -38,10 +39,8 @@ export const movieReduers = createReducer(initialMovies,
 
 
 export const reducers: ActionReducerMap<AppState> = {
-    movieState: (state: MovieState | undefined, action: Action) => {
-        console.log(111);
-       return movieReduers(state, action);
-    }, 
+    movieState: (state: MovieState | undefined, action: Action) => movieReduers(state, action), 
+    users: fromUser.reducer,
     globalState: (state: GlobalState | undefined, action: Action) => globalReducers(state, action)
 };
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {

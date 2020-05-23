@@ -26,10 +26,10 @@ export class MovieEffects {
         ), { dispatch: true });
    
 
-    logActions$ = createEffect(() =>
-        this.actions$.pipe(
-            tap(action => console.log(action))
-        ), { dispatch: false });
+    // logActions$ = createEffect(() =>
+    //     this.actions$.pipe(
+    //         tap(action => console.log(action))
+    //     ), { dispatch: false });
     loadMovie$ = createEffect(() => {
         return this.actions$.pipe(
             ofType('[Section Component] Load Movies'),

@@ -1,18 +1,18 @@
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
-
+import { EntityDataModule } from '@ngrx/data';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ShareModule } from './share/share.module';
-import { ServiceModule } from './service/service.module';
-import { SectionModule } from './section/section.module';
-import { PageModule } from './page/page.module';
-import { StoreModule, Action } from '@ngrx/store';
-import { reducers, metaReducers } from './ngrx/reducers';
-import { EffectsModule } from '@ngrx/effects';
 import { MovieEffects } from './ngrx/effects/movie.effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { RouterModule } from '@angular/router';
+import { metaReducers, reducers } from './ngrx/reducers';
+import { PageModule } from './page/page.module';
+import { SectionModule } from './section/section.module';
+import { ServiceModule } from './service/service.module';
+import { ShareModule } from './share/share.module';
+
 
 
 @NgModule({
