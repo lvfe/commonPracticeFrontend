@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState, addextra } from './ngrx/selector';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'productity-ui';
+  public  allData$;
+  constructor(public store:Store<AppState>){
+    this.allData$ = this.store.select(addextra(), {id:'oauthUrl', extra: 'sss'});
+  }
 }
