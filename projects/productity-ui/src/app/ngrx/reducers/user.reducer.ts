@@ -4,7 +4,7 @@ import { UserActionUnion, UserActionTypes } from '../action/user.actions';
 
 
 export interface  State extends EntityState<User> {
-    selectedUserId: number | null;
+    selectedUserId: string | null;
 }
 
 export const adapter: EntityAdapter<User> = createEntityAdapter<User>();
@@ -30,6 +30,12 @@ export function reducer(state = initialState, action: UserActionUnion):State {
         }
         case UserActionTypes.UPSERT_USER: {
             return adapter.upsertOne(action.payload.user, state);
+        }
+        case UserActionTypes.CLEAR_USERS: {
+            return adapter.removeAll({ ...state, selectedUserId: null });
+        }
+        case UserActionTypes.SET_CURRENTUSER: {
+            return ({...state, selectedUserId: action.payload.id});
         }
         default: {
             return state;
