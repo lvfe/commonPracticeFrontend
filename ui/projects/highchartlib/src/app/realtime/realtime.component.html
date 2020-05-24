@@ -4,6 +4,6 @@
         [(ngModel)]="startValue" nzPlaceHolder="Start" (ngModelChange)="onStartChange($event)"
         (nzOnOpenChange)="handleStartOpenChange($event)">
     </nz-date-picker>
-    <button nz-button nzType="primary">Start from Now(reset)</button>
+    <button nz-button (click)="restart()" nzType="primary">Start from Now(reset)</button>
 </div>
-<highcharts-chart [Highcharts]="LineHighcharts" [options]="linechartOptions" style="display: block;"></highcharts-chart>
+<highcharts-chart [Highcharts]="LineHighcharts" [options]="linechartOptions" (chartInstance)="chartInstan($event)" style="display: block;"></highcharts-chart>

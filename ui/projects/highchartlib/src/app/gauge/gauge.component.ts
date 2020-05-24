@@ -46,9 +46,14 @@ export class GaugeComponent implements OnInit {
   };
 
   gaugeType = "semi";
-  gaugeValue = 28.3;
-  gaugeLabel = "Speed";
-  gaugeAppendText = "km/hr";
+  gaugeValue = 23;
+  gaugeLabel = "This hour";
+  gaugeAppendText = "";
+
+  daygaugeType = "semi";
+  daygaugeValue = 283;
+  daygaugeLabel = "This day";
+  daygaugeAppendText = "";
   constructor() {
     console.log(123);
 

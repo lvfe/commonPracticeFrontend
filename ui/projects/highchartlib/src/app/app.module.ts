@@ -8,7 +8,7 @@ import { RealtimeComponent } from './realtime/realtime.component';
 import { GaugeComponent } from './gauge/gauge.component';
 import { OverviewComponent } from './overview/overview.component';
 import { KafkaBarchartComponent } from './kafka-barchart/kafka-barchart.component';
-import { NgZorroAntdModule, NZ_I18N, en_US, NzDatePickerModule } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NZ_I18N, en_US, NzGridModule, NzDatePickerModule } from 'ng-zorro-antd';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,6 +33,7 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     NzDatePickerModule,
+    NzGridModule,
     BrowserAnimationsModule, 
     NgxGaugeModule,
   ],

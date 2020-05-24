@@ -1,29 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import exportingInit from 'highcharts/modules/exporting';
+import { ChatService } from '../chat.service';
 
 @Component({
   selector: 'app-realtime',
   templateUrl: './realtime.component.html',
   styleUrls: ['./realtime.component.scss']
 })
-export class RealtimeComponent implements OnInit {
+export class RealtimeComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  public message;
+  public messages = [];
+  public connection;
+  chartInstance;
   LineHighcharts: typeof Highcharts = Highcharts;
   linechartOptions: Highcharts.Options = {
     series: [{
-      data: (function () {
-        var data = [];
-        var time = (new Date()).getTime();
-        for (let i = -19; i < -0; i += 1) {
-          data.push({
-            x: time + i * 1000,
-            y: 0
-          });
-        }
-
-        return data;
-      }()),
+      data: [],
       type: 'spline'
     }],
     title: {
@@ -31,7 +25,7 @@ export class RealtimeComponent implements OnInit {
     },
     tooltip: {
       formatter: function () {
-        return '<b>' + this.series.name + '</b><br/>' +
+        return '<b>' + 'Count' + '</b><br/>' +
           Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br>' +
           Highcharts.numberFormat(this.y, 2)
       }
@@ -49,25 +43,32 @@ export class RealtimeComponent implements OnInit {
       }
     },
     chart: {
-      marginRight: 10,
-      events: {
-        load: function () {
-          var series = this.series[0];
-          let chart = this;
-          setInterval(function () {
-            var x = (new Date()).getTime();
-            var y = Math.random();
-            series.addPoint([x, y], true, true);
-          }, 3000);
-        }
-      }
+      marginRight: 10
     }
   };
-  constructor() { }
-
-  ngOnInit() {
+  constructor(public chatService: ChatService) { }
+  ngAfterViewInit(): void {
+    this.reset();
   }
 
+  ngOnInit() {
+    this.connection = this.chatService.getMessages().subscribe((message:string) => {
+      let msg = JSON.parse(message);
+      let x = msg.time;
+      let y = msg.count;
+      this.chartInstance.series[0].addPoint([x, y], true, true);
+    })
+  }
+  chartInstan($event){
+    this.chartInstance = $event;
+  }
+
+  restart() {
+    let data = this.chartInstance.series[0].data;
+    this.chartInstance.series[0].setData();
+    this.chatService.sendMessage('chat', this.message);
+    this.reset();
+  }
   startValue: Date | null = null;
 
   onStartChange(date: Date): void {
@@ -75,9 +76,21 @@ export class RealtimeComponent implements OnInit {
   }
 
   handleStartOpenChange(open: boolean): void {
-   
-    console.log('handleStartOpenChange', open);
-    if(this.startValue!=null)
+    if (this.startValue != null)
       console.log(this.startValue.getTime());
+  }
+  private reset(){
+      var data = [];
+      var time = (new Date()).getTime();
+      for (let i = -19; i < -0; i += 1) {
+        data.push({
+          x: time + i * 3000,
+          y: 0
+        });
+      }
+      this.chartInstance.series[0].setData(data);
+  }
+  ngOnDestroy(): void {
+    this.connection.unsubscribe();
   }
 }

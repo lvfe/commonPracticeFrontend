@@ -7,4 +7,10 @@
         nzPlaceHolder="End" [nzOpen]="endOpen" (ngModelChange)="onEndChange($event)"
         (nzOnOpenChange)="handleEndOpenChange($event)">
     </nz-date-picker>
+    <highcharts-chart [Highcharts]="detailHighCharts" [options]="detailchartOptions"
+    (chartInstance) = "chartInstanceDetail($event)"
+    style="height: 300px; display: block;"></highcharts-chart>
+    <highcharts-chart [Highcharts]="dyHighcharts" [options]="dychartOptions"
+    (chartInstance) = "chartInstanceDynamic($event)"
+    style="height: 100px; display: block;"></highcharts-chart>
 </div>
