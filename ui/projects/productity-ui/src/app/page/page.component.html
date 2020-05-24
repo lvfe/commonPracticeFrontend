@@ -1,0 +1,9 @@
+<p>page works!{{allData$|async|json}}</p>
+<app-subpage></app-subpage>
+<div *ngFor="let item of users$|async">
+    <div>{{item|json}}</div>
+    <button (click)="removeUser(item)">X</button>
+    <button (click)="setCurrent(item)">set as current</button>
+</div>
+<button (click)="addUser()">Add User</button>
+<div>Current User:{{currentUser$|async|json}}</div>

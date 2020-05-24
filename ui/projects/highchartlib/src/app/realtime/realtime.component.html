@@ -1,0 +1,9 @@
+<div>
+    Start from: 
+    <nz-date-picker nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss"
+        [(ngModel)]="startValue" nzPlaceHolder="Start" (ngModelChange)="onStartChange($event)"
+        (nzOnOpenChange)="handleStartOpenChange($event)">
+    </nz-date-picker>
+    <button nz-button nzType="primary">Start from Now(reset)</button>
+</div>
+<highcharts-chart [Highcharts]="LineHighcharts" [options]="linechartOptions" style="display: block;"></highcharts-chart>
