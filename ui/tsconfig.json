@@ -24,6 +24,10 @@
       ],
       "bar-chart/*": [
         "dist/bar-chart/*"
+      ],
+      "ng9-chartjs": [
+        "dist/ng9-chartjs/ng9-chartjs",
+        "dist/ng9-chartjs"
       ]
     }
   },
